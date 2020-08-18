@@ -13,6 +13,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "HomeController@index");
+
+Route::get('/siswa', "SiswaController@index");
+Route::post('/siswa/tambah', "SiswaController@store");
+Route::post('/siswa/update', "SiswaController@update");
+Route::get('/siswa/hapus/{id}', "SiswaController@destroy");
+
+Route::get('/guru', "GuruController@index");
+Route::post('/guru/tambah', "GuruController@store");
+Route::post('/guru/update', "GuruController@update");
+Route::get('/guru/hapus/{id}', "GuruController@destroy");
+
+Route::get('/pelajaran', "PelajaranController@index");
+Route::post('/pelajaran/tambah', "PelajaranController@store");
+Route::post('/pelajaran/update', "PelajaranController@update");
+Route::get('/pelajaran/hapus/{id}', "PelajaranController@destroy");
+
+Route::get('/nilai', "NilaiController@index");
+Route::get('/nilai/{id}', "NilaiController@show");
+
+// Route::get('/', function() {
+// 	return view("index");
+// });
