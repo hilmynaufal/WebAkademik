@@ -10,24 +10,28 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">No</th>
-      <th scope="col">Kode Pelajaran</th>
-      <th scope="col">Nama Pelajaran</th>
-      <th scope="col">Tingkat</th>
+      <th scope="col">Kelas</th>
+      <th scope="col">Pelajaran</th>
+      <th scope="col">Pengajar</th>
+      <th scope="col">Waktu</th>
+      <th scope="col">SKS</th>
       <th colspan="2" scope="col">AKSI</th>
     </tr>
   </thead>
   <tbody>
 
-    @foreach($pelajaran as $val)
+    @foreach($jadwal as $val)
 
     <tr>
       <th scope="row">{{ $loop->iteration }}</th>
-      <td>{{ $val->kode_pelajaran }}</td>
-      <td>{{ $val->nama_pelajaran}}</td>
-      <td>{{ $val->tingkat}}</td>
+      <td>{{ $val->kelas }}</td>
+      <td>{{ $val->nama_pelajaran }}</td>
+      <td>{{ $val->nama_guru }}</td>
+      <td>{{ $val->waktu }}</td>
+      <td>{{ $val->sks }}</td>
         
-          <td><a class="fas fa-edit bg-warning p-2 text-white rounded edit-modal-click" data-id="{{ $val->kode_pelajaran }}">EDIT</a></td>
-         <td><a href="javascript:;" data-toggle="modal" onclick="deleteData('{{ $val->kode_pelajaran }}')" data-target="#DeleteModal" class="fas fa-trash bg-danger p-2 text-white rounded">DELETE</td>
+          <td><a class="fas fa-edit bg-warning p-2 text-white rounded edit-modal-click" data-Nip="{{ $val->Nip }}" data-kode_pelajaran="{{ $val->kode_pelajaran }}">EDIT</a></td>
+         <td><a href="javascript:;" data-toggle="modal" onclick="" data-target="#DeleteModal" class="fas fa-trash bg-danger p-2 text-white rounded">DELETE</a></td>
 
     </tr>
     @endforeach
@@ -43,26 +47,44 @@
     <div class="modal-dialog">
       <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tambah Pelajaran</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Siswa</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
           <div class="modal-body">
-            <form action="/pelajaran/tambah" method="post">
+            <form action="/jadwal/tambah" method="post">
               @csrf
                 <div class="form-group">
-                  <label>Kode Pelajaran</label>
-                    <input type="text" name="kode_pelajaran" class="form-control">      
+                  <label>Nama Pengajar</label>
+                    <select class="form-control form-control-md" name="Nip">
+                      <option selected disabled value="">-- Nama Guru --</option>
+                        @foreach ($guru as $val)
+                         <option value="{{$val->Nip}}">{{$val->nama_guru}}</option>
+                        @endforeach
+                      </select>      
                   </div>
 
-                 <div class="form-group">
+                <div class="form-group">
                   <label>Nama Pelajaran</label>
-            <input type="text" name="nama_pelajaran" class="form-control">      
+                    <select class="form-control form-control-md" name="kode_pelajaran">
+                      <option selected disabled value="">-- Nama Pelajaran --</option>
+                        @foreach ($pelajaran as $val)
+                         <option value="{{$val->kode_pelajaran}}">{{$val->nama_pelajaran}}</option>
+                        @endforeach
+                      </select>      
+                  </div>
+                  <div class="form-group">
+                  <label>Kelas</label>
+            <input type="text" name="kelas" class="form-control">      
           </div>
           <div class="form-group">
-                  <label>Tingkat</label>
-            <input type="text" name="tingkat" class="form-control">      
+                  <label>Waktu</label>
+            <input type="text" id="timepicker" name="waktu" class="form-control">      
+          </div>
+          <div class="form-group">
+                  <label>SKS</label>
+            <input type="text" name="sks" class="form-control">      
           </div>
           <div class="modal-footer">  
         <button type="submit" class="btn btn-success" data-dissmis="modal">Simpan</button>
@@ -74,30 +96,49 @@
   </div>
 </div>
 
+
 <div class="modal fade" id="EditModal" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Pelajaran</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
           <div class="modal-body">
-            <form action="/pelajaran/update" method="post">
+            <form action="/jadwal/update" method="post">
               @csrf
                 <div class="form-group">
-                  <label>Kode Pelajaran</label>
-                    <input type="text" name="kode_pelajaran" id="edit-kode_pelajaran" class="form-control">      
+                  <label>Nama Pengajar</label>
+                    <select class="form-control form-control-md" name="Nip" id="edit-Nip">
+                      <option selected disabled value="">-- Nama Guru --</option>
+                        @foreach ($guru as $val)
+                         <option value="{{$val->Nip}}">{{$val->nama_guru}}</option>
+                        @endforeach
+                      </select>      
                   </div>
 
-                 <div class="form-group">
+                <div class="form-group">
                   <label>Nama Pelajaran</label>
-            <input type="text" name="nama_pelajaran" class="form-control" id="edit-nama_pelajaran">      
+                    <select class="form-control form-control-md" name="kode_pelajaran" id="edit-kode_pelajaran">
+                      <option selected disabled value="">-- Nama Pelajaran --</option>
+                        @foreach ($pelajaran as $val)
+                         <option value="{{$val->kode_pelajaran}}">{{$val->nama_pelajaran}}</option>
+                        @endforeach
+                      </select>      
+                  </div>
+                  <div class="form-group">
+                  <label>Kelas</label>
+            <input type="text" name="kelas" class="form-control" id="edit-kelas">      
           </div>
           <div class="form-group">
-                  <label>Tingkat</label>
-            <input type="text" name="tingkat" class="form-control" id="edit-tingkat">      
+                  <label>Waktu</label>
+            <input type="text" id="timepicker" name="waktu" class="form-control" id="edit-waktu">      
+          </div>
+          <div class="form-group">
+                  <label>SKS</label>
+            <input type="text" name="sks" class="form-control" id="edit-sks">      
           </div>
           <div class="modal-footer">  
         <button type="submit" class="btn btn-success" data-dissmis="modal">Simpan</button>
@@ -141,13 +182,13 @@
 
 <script type="text/javascript">
   $(document).on("click", ".edit-modal-click", function () {
-    var id = $(this).attr('data-id');
+    var nip = $(this).attr('data-Nip');
+    var kode_pelajaran = $(this).attr('data-kode_pelajaran');
     var rowCells = $(this).closest("tr").children(); 
     var nama = rowCells.eq(2).text();
     var tingkat = rowCells.eq(3).text();
-     $("#edit-kode_pelajaran").val(id);
-     $("#edit-nama_pelajaran").val(nama);
-     $("#edit-tingkat").val(tingkat);
+     $("#edit-Nip").val(nip);
+     $("#edit-kelas").val(nip);
      $('#EditModal').modal('show');
     });
 

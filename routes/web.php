@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', "HomeController@index");
+Route::get('/', "SiswaController@index");
 
 Route::get('/siswa', "SiswaController@index");
 Route::post('/siswa/tambah', "SiswaController@store");
@@ -30,8 +30,18 @@ Route::post('/pelajaran/tambah', "PelajaranController@store");
 Route::post('/pelajaran/update', "PelajaranController@update");
 Route::get('/pelajaran/hapus/{id}', "PelajaranController@destroy");
 
+Route::get('/jadwal', "JadwalController@index");
+Route::post('/jadwal/tambah', "JadwalController@store");
+Route::post('/jadwal/update', "JadwalController@update");
+Route::get('/jadwal/hapus/{id}', "JadwalController@destroy");
+
 Route::get('/nilai', "NilaiController@index");
 Route::get('/nilai/{id}', "NilaiController@show");
+Route::post('/nilai/tambah', "NilaiController@store");
+Route::post('/nilai/update', "NilaiController@update");
+Route::get('/nilai/hapus/{id}/pelajaran/{id2}', "NilaiController@destroy");
+
+Route::get('/test', "JadwalController@index");
 
 // Route::get('/', function() {
 // 	return view("index");

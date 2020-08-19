@@ -28,11 +28,8 @@
 	          <span class="sr-only">Toggle Menu</span>
 	        </button>
         </div>
-	  		<h1><a href="index.html" class="logo">Academic DashBoard</a></h1>
+	  		<h1><a href="/" class="logo">Academic DashBoard</a></h1>
         <ul class="list-unstyled components mb-5">
-          <li>
-            <a href="/"><span class="fa fa-home mr-3"></span> Home</a>
-          </li>
           <li>
               <a href="siswa"><span class="fa fa-user mr-3"></span> Siswa</a>
           </li>

@@ -4,7 +4,7 @@
 
 <div id="content" class="p-4 p-md-5 pt-5">
 <div class="col-md-12 p-5 pt-2">
-   <h3><i class="fas fa-paperclip mr-2"></i>List Siswa</h3><hr>
+   <h3><i class="fas fa-paperclip mr-2"></i>SISWA</h3><hr>
    <a href="javascript:;" data-toggle="modal" data-target="#CreateModal" class="btn btn-primary mr-3"><i class= "fas fa-plus mr-2"></i></i>Tambah Data</a>
 <table class="table table-bordered">
   <thead class="thead-dark">
